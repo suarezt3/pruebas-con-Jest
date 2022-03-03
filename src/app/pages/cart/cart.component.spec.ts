@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, inject, TestBed } from "@angular/core/testing";
 import { CartComponent } from "./cart.component"
 import { HttpClientTestingModule} from '@angular/common/http/testing'
 import { BookService } from "../../services/book.service";
@@ -76,6 +76,13 @@ describe('Cart component', () => {
         expect(component).toBeTruthy();
     });
 
+    //? ALTERNATVAS PARA INSTANCIAR UN COMPONENTE O SERVCIO
+    //? HACIENDOLO DE ESTA MANERA ES NECESARIO PONER EL COMPONENTE EN LOS PROVIDER TAMBIEN EN LA CONFIGURACION
+    // it('Should create', inject([CartComponent], (component: CartComponent) => {
+    //     expect(component).toBeTruthy() HACIENDOLO DE ESTA MANERA ES NECESARIO PONER EL COMPONENTE EN LOS PROVIDER TAMBIEN
+    // }))
+
+
     it('getTotalPrice returs and amount', () => {
         const totalPrice = component.getTotalPrice(listBook)
         expect(totalPrice).toBeGreaterThan(0);
@@ -83,12 +90,6 @@ describe('Cart component', () => {
         expect(totalPrice).not.toBeNull()
     });
 
-    // public onInputNumberChange(action: string, book: Book): void {
-    //     const amount = action === 'plus' ? book.amount + 1 : book.amount - 1;
-    //     book.amount = Number(amount);
-    //     this.listCartBook = this._bookService.updateAmountBook(book);
-    //     this.totalPrice = this.getTotalPrice(this.listCartBook);
-    //   }
 
     it('onInputNumberChanges increments correctly', () =>{
         const action = 'plus';
